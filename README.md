@@ -21,8 +21,22 @@ Follow these steps to set up the Gaelic ASR:
 To transcribe an audio file using 4 threads, run the following command:
 
 ```
-OMP_NUM_THREADS=4 python3 asr.py model audio.wav
+OMP_NUM_THREADS=4 python3 transcribe.py audio.wav
 ```
+
+## Using Docker
+
+To use Docker, follow these steps:
+
+1. Build a Docker image:
+    ```bash
+    docker build -t gaelic-asr .
+    ```
+
+2. Transcribe an audio file using the Docker image (please, change the `ABSOLUTE_PATH_TO_AUDIO_FILE`):
+    ```bash
+   docker run -v ABSOLUTE_PATH_TO_AUDIO_FILE:/app/test.wav:ro --rm -i -t gaelic-asr "./transcribe.py test.wav"
+    ```
 
 ## License
 The code is licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt) and the ASR model is licensed under [Creative Commons CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 
 import librosa
@@ -102,11 +104,11 @@ class ASR:
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        sys.exit('Usage: OMP_NUM_THREADS=4 python3 asr.py model wav')
+    if len(sys.argv) != 2:
+        sys.exit('Usage: OMP_NUM_THREADS=4 python3 transcribe.py wav')
 
-    asr = create_asr(sys.argv[1])
-    wav, _ = librosa.load(sys.argv[2], mono=True, sr=16000)
+    asr = create_asr('model')
+    wav, _ = librosa.load(sys.argv[1], mono=True, sr=16000)
     segment_duration = 10
     for i, segment_transcript in enumerate(asr.transcribe(wav, segment_duration)):
         print(i + 1)
