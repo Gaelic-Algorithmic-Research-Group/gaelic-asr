@@ -30,12 +30,12 @@ To use Docker, follow these steps:
 
 1. Build a Docker image:
     ```bash
-    docker build -t gaelic-asr .
+    docker build --platform=linux/amd64 -t gaelic-asr .
     ```
 
 2. Transcribe an audio file using the Docker image (please, change the `ABSOLUTE_PATH_TO_AUDIO_FILE`):
     ```bash
-   docker run -v ABSOLUTE_PATH_TO_AUDIO_FILE:/app/test.wav:ro --rm -i -t gaelic-asr "./transcribe.py test.wav"
+    docker run --platform=linux/amd64 -v ABSOLUTE_PATH_TO_AUDIO_FILE:/app/test.wav:ro --rm -i -t gaelic-asr "./transcribe.py test.wav"
     ```
 
 ## License
