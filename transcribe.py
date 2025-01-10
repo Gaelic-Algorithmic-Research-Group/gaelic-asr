@@ -88,8 +88,14 @@ class ASR:
         chunks = []
         chunk_duration = 2.5
         chunk_length = int(chunk_duration * 16000)
+        min_chunk_duration = 0.1
+        min_chunk_length = int(min_chunk_duration * 16000)
         for start in range(0, wav.shape[0], chunk_length):
             chunk = wav[start:start + chunk_length].astype('float32')
+            if chunk.shape[0] < min_chunk_length:
+              padding = np.zeros((min_chunk_length - chunk.shape[0],), dtype='float32')
+              chunk = np.concatenate([chunk, padding])
+
             chunks.append(self.xlsr_model.run(['output'], {'input': chunk.reshape((1, -1))})[0])
 
         return np.concatenate(chunks, axis=1)[0]
